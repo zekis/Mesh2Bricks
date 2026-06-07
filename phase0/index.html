@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SMI Phase 0 — Voxel Kill Test</title>
+  <style>
+    html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; font-family: ui-monospace, Menlo, monospace; }
+    #app { width: 100%; height: 100%; }
+    #ui {
+      position: absolute; top: 12px; left: 12px;
+      background: rgba(10, 10, 15, 0.85); color: #eee; padding: 14px;
+      border-radius: 6px; font-size: 12px; max-width: 320px;
+      border: 1px solid #333;
+    }
+    #ui h1 { font-size: 13px; margin: 0 0 10px; letter-spacing: 0.5px; }
+    #ui label { display: block; margin: 8px 0 3px; color: #aaa; }
+    #ui input[type=file], #ui select, #ui button {
+      width: 100%; box-sizing: border-box; margin-bottom: 2px;
+      background: #1a1a22; color: #eee; border: 1px solid #333; padding: 4px;
+      font-family: inherit; font-size: 12px;
+    }
+    #ui input[type=range] { width: 100%; }
+    #ui button { cursor: pointer; padding: 6px; background: #2a3340; }
+    #ui button:hover { background: #3a4555; }
+    #stats { margin-top: 10px; padding-top: 10px; border-top: 1px solid #333; color: #88aacc; }
+    #stats div { margin: 2px 0; }
+    #legend { margin-top: 10px; padding-top: 10px; border-top: 1px solid #333; }
+    #legend .row { display: flex; align-items: center; margin: 2px 0; font-size: 11px; }
+    #legend .swatch { width: 12px; height: 12px; margin-right: 6px; border: 1px solid #444; }
+    #layerPanel {
+      position: absolute; top: 30px; bottom: 30px; right: 18px;
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      background: rgba(10, 10, 15, 0.7); color: #ccc; padding: 10px 6px;
+      border: 1px solid #333; border-radius: 6px; font-size: 11px;
+    }
+    #layerPanel #layerLabel { font-family: ui-monospace, Menlo, monospace; min-width: 28px; text-align: center; }
+    #layerSlider {
+      flex: 1; writing-mode: vertical-lr; direction: rtl;
+      width: 24px; min-height: 200px;
+      accent-color: #88aacc;
+    }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+  <div id="layerPanel">
+    <div>Layer</div>
+    <input id="layerSlider" type="range" min="0" max="100" value="100" step="1">
+    <div id="layerLabel">all</div>
+  </div>
+  <div id="ui">
+    <h1>SMI · Phase 0 Kill Test</h1>
+    <label>Mesh (.glb / .gltf):</label>
+    <input id="file" type="file" accept=".glb,.gltf">
+    <label>View:</label>
+    <select id="mode">
+      <option value="mesh">Original mesh</option>
+      <option value="voxels">Voxel cubes (Test 1)</option>
+      <option value="quantized" selected>Lego model</option>
+      <option value="ldraw">LDraw gallery</option>
+    </select>
+    <label>Quantizer:</label>
+    <select id="quantizer">
+      <option value="topology">topology (geometry-aware)</option>
+      <option value="multipass">multipass (beams + plates)</option>
+      <option value="ldraw" selected>LDraw kit fitter</option>
+      <option value="normal">normal-match (naive)</option>
+    </select>
+    <label style="display:flex; align-items:center; gap:6px; margin-top:6px;">
+      <input id="smoothing" type="checkbox" checked style="width:auto; margin:0;">
+      Smooth voxels (kills spikes)
+    </label>
+    <label>Block color:</label>
+    <select id="coloring">
+      <option value="solid" selected>solid (read silhouette)</option>
+      <option value="bytype">by block type (debug)</option>
+      <option value="physics">physics check (red = unsupported)</option>
+    </select>
+    <label>Grid resolution: <span id="resLabel">32</span>³</label>
+    <input id="res" type="range" min="8" max="64" value="32" step="1">
+    <button id="rerun">Re-run pipeline</button>
+    <button id="explode">💥 Explode</button>
+    <button id="crash">🪨 Crash</button>
+    <div id="stats"></div>
+    <div id="legend"></div>
+  </div>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>

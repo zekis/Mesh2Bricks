@@ -1,0 +1,20 @@
+{
+  "name": "smi-phase0",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@dimforge/rapier3d-compat": "^0.19.3",
+    "three": "^0.165.0"
+  },
+  "devDependencies": {
+    "@types/three": "^0.165.0",
+    "typescript": "^5.4.0",
+    "vite": "^5.2.0"
+  }
+}

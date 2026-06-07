@@ -1,0 +1,17 @@
+{
+  "name": "ldraw-runner",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Pre-processor that converts LDraw .dat parts into a flat manifest + geometry buffers for the SMI multipass quantizer.",
+  "scripts": {
+    "build": "tsc --noEmit",
+    "start": "tsx src/index.ts",
+    "process": "tsx src/index.ts --parts 3005,3004,3003,3002,3001,3010,3009,3008,3007,3024,3023,3022,3021,3020,3795,3034,3710,3666,3040b,3039,3037,3038,3298,3299,3957,3941,4032,3960,86500,3070b,3069b,63864,2431,6636,3068b,87079,3062,6141,54200,4070,30363,11477,50950,61678,2412b,4150,41748,41747,4081b,2555,43713 --out out/manifest.json"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0"
+  }
+}
